@@ -1,58 +1,30 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Layout from './Layout';
-import Logo from './Logo';
-import ContactEditer from './ContactEditer';
-import ContactList from './ContactList';
-import Filter from './Filter';
-import ButtonThemeChanger from './ButtonThemeChanger';
-import Spiner from './Spiner';
-import Notification from './Notification';
-import { CSSTransition } from 'react-transition-group';
+import { Switch, Route } from 'react-router-dom';
+import routes from '../routes';
+import ThemeContext from '../context/ThemeContext';
 
-export default function App({
-  errorContacts,
-  isLoadingContacts,
-  errorContactExisted,
-  contacts,
-  onHideAlert,
-}) {
-  let showAlert = errorContactExisted.length > 0;
-  return (
-    <Layout>
-      <div className="header">
-        <Logo />
-        <ButtonThemeChanger />
-        <CSSTransition
-          in={showAlert}
-          timeout={500}
-          classNames="notification-fade"
-          onEnter={() => setTimeout(onHideAlert, 2000)}
-          unmountOnExit
-        >
-          <Notification message={`${errorContactExisted} is already exist!`} />
-        </CSSTransition>
-      </div>
+const Homepage = lazy(() => import('../views/Homepage'));
+const RegisterPage = lazy(() => import('../views/RegisterPage'));
+const LoginPage = lazy(() => import('../views/LoginPage'));
+const Contacts = lazy(() => import('../views/Contacts/ContactsContainer'));
+const NotFound = lazy(() => import('../views/NotFound'));
 
-      <ContactEditer />
+const App = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ThemeContext>
+      <Layout>
+        <Switch>
+          <Route path={routes.HOMEPAGE} exact component={Homepage} />
+          <Route path={routes.REGISTER} exact component={RegisterPage} />
+          <Route path={routes.LOGIN} exact component={LoginPage} />
+          <Route path={routes.CONTACTS} exact component={Contacts} />
+          <Route component={NotFound} />
+          {/* <Redirect to={routes.homepage} /> */}
+        </Switch>
+      </Layout>
+    </ThemeContext>
+  </Suspense>
+);
 
-      <CSSTransition
-        in={contacts.length > 1}
-        timeout={250}
-        classNames="filter-fade"
-        unmountOnExit
-      >
-        <Filter />
-      </CSSTransition>
-
-      <div className="spiner"> {isLoadingContacts && <Spiner />}</div>
-
-      {errorContacts && (
-        <Notification
-          message={`Whoops, something went wrong: ${errorContacts}`}
-        />
-      )}
-
-      <ContactList />
-    </Layout>
-  );
-}
+export default App;

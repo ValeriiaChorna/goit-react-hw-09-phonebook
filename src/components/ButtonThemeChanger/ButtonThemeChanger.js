@@ -9,7 +9,7 @@ const Button = ({ theme }) => (
     type="button"
     onClick={theme.toggleTheme}
   >
-    {theme.theme}
+    {theme.theme} theme
   </button>
 );
 

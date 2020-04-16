@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import contactOperations from '../redux/contacts/contactOperations';
-import contactsSelectors from '../redux/contacts/contactsSelectors';
-import ThemeContext from '../context/ThemeContext';
-import App from './App';
+import contactOperations from '../../redux/contacts/contactOperations';
+import contactsSelectors from '../../redux/contacts/contactsSelectors';
+import Contacts from './Contacts';
 
-class AppContainer extends Component {
+class ContactsContainer extends Component {
   componentDidMount() {
     this.props.onFetchContacts();
   }
 
   render() {
-    return (
-      <ThemeContext>
-        <App {...this.props} />
-      </ThemeContext>
-    );
+    return <Contacts {...this.props} />;
   }
 }
 const MapStateToProps = state => ({
@@ -30,4 +25,4 @@ const mapDispatchToProps = {
   onHideAlert: contactOperations.clearDoesExistContact,
 };
 
-export default connect(MapStateToProps, mapDispatchToProps)(AppContainer);
+export default connect(MapStateToProps, mapDispatchToProps)(ContactsContainer);

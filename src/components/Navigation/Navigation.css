@@ -1,0 +1,9 @@
+.navigationList {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 250px;
+  list-style: none;
+  margin: 0px;
+  padding: 0;
+}
