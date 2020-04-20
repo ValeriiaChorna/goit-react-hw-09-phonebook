@@ -1,14 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { authSelectors } from '../redux/auth';
 import Navigation from './Navigation';
 import Logo from './Logo';
+import UserMenu from './UserMenu';
 import ButtonThemeChanger from './ButtonThemeChanger';
 
-const Appbar = () => (
+const AppBar = ({ isAuthenticated }) => (
   <header className="header">
-    <Logo />
-    <Navigation />
-    <ButtonThemeChanger />
+    <div className={'appBarContainer'}>
+      <Logo />
+      <Navigation />
+      <ButtonThemeChanger />
+    </div>
+    {isAuthenticated && <UserMenu />}
   </header>
 );
 
-export default Appbar;
+const mapStateToProps = state => ({
+  isAuthenticated: authSelectors.isAuthenticated(state),
+});
+
+export default connect(mapStateToProps)(AppBar);

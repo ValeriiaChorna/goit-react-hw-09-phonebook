@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import contactOperations from '../../redux/contacts/contactOperations';
 import contactsSelectors from '../../redux/contacts/contactsSelectors';
+import { authSelectors } from '../../redux/auth';
 import Contacts from './Contacts';
 
 class ContactsContainer extends Component {
@@ -18,6 +19,7 @@ const MapStateToProps = state => ({
   errorContacts: contactsSelectors.getError(state),
   contacts: contactsSelectors.getContacts(state),
   errorContactExisted: contactsSelectors.getErrorContactExisted(state),
+  isAuthenticated: authSelectors.isAuthenticated(state),
 });
 
 const mapDispatchToProps = {

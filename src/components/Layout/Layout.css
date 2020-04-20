@@ -1,6 +1,6 @@
 .Layout-light {
   position: relative;
-  max-width: 900px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   padding: 20px;
@@ -12,7 +12,7 @@
 
 .Layout-dark {
   position: relative;
-  max-width: 900px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   padding: 20px;
@@ -39,6 +39,10 @@ input:focus {
   border: 2px solid #1976d2;
 }
 
+form {
+  width: 300px;
+}
+
 .light {
   color: black;
   background-color: whitesmoke;
@@ -56,28 +60,13 @@ input:focus {
   padding: 5px;
 }
 
+.appBarContainer {
+  display: flex;
+  align-items: center;
+}
+
 .spiner {
   text-align: center;
-}
-
-.filter-fade-enter {
-  opacity: 0;
-  transform: scale(0.1);
-}
-.filter-fade-enter-active {
-  opacity: 1;
-  transform: scale(1);
-  transition: all 250ms linear;
-}
-.filter-fade-exit {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.filter-fade-exit-active {
-  opacity: 0;
-  transform: scale(0.1);
-  transition: all 250ms linear;
 }
 
 .notification {
