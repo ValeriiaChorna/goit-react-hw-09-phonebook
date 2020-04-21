@@ -30,8 +30,8 @@ const loading = createReducer(false, {
 });
 
 const error = createReducer(null, {
-  [contactsActions.fetchContactsError]: error => error.message,
-  [contactsActions.addContactError]: error => error.message,
+  [contactsActions.fetchContactsError]: error => error,
+  [contactsActions.addContactError]: error => error,
 });
 
 const errorContactExisted = createReducer('', {

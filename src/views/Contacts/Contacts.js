@@ -8,7 +8,6 @@ import { CSSTransition } from 'react-transition-group';
 import './Contact.css';
 
 export default function Contacts({
-  isAuthenticated,
   errorContacts,
   isLoadingContacts,
   errorContactExisted,
@@ -17,45 +16,37 @@ export default function Contacts({
 }) {
   let showAlert = errorContactExisted > 0;
   return (
-    <>
-      {isAuthenticated ? (
-        <div className="contactsContainer">
-          <CSSTransition
-            in={showAlert}
-            timeout={500}
-            classNames="notification-fade"
-            onEnter={() => setTimeout(onHideAlert, 2000)}
-            unmountOnExit
-          >
-            <Notification
-              message={`${errorContactExisted} is already exist!`}
-            />
-          </CSSTransition>
+    <div className="contactsContainer">
+      <CSSTransition
+        in={showAlert}
+        timeout={500}
+        classNames="notification-fade"
+        onEnter={() => setTimeout(onHideAlert, 2000)}
+        unmountOnExit
+      >
+        <Notification message={`${errorContactExisted} is already exist!`} />
+      </CSSTransition>
 
-          <ContactEditer />
+      <ContactEditer />
 
-          <CSSTransition
-            in={contacts.length > 1}
-            timeout={250}
-            classNames="filter-fade"
-            unmountOnExit
-          >
-            <Filter />
-          </CSSTransition>
+      <CSSTransition
+        in={contacts.length > 1}
+        timeout={250}
+        classNames="filter-fade"
+        unmountOnExit
+      >
+        <Filter />
+      </CSSTransition>
 
-          <div className="spiner"> {isLoadingContacts && <Spiner />}</div>
+      <div className="spiner"> {isLoadingContacts && <Spiner />}</div>
 
-          {errorContacts && (
-            <Notification
-              message={`Whoops, something went wrong: ${errorContacts}`}
-            />
-          )}
-
-          <ContactList />
-        </div>
-      ) : (
-        <h2>Please login</h2>
+      {errorContacts && (
+        <Notification
+          message={`Whoops, something went wrong: ${errorContacts}`}
+        />
       )}
-    </>
+
+      <ContactList />
+    </div>
   );
 }

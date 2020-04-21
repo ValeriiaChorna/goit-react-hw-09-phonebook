@@ -1,43 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import routes from '../../routes';
+import withAuth from '../hoc/withAuth';
 import './Navigation.css';
 
-const Navigation = () => (
-  <ul className="navigationList">
-    <li>
-      <NavLink
-        to={routes.HOMEPAGE}
-        className="link"
-        activeClassName="active-link"
-      >
-        Home
+const Navigation = ({ isAuthenticated }) => (
+  <nav>
+    <NavLink to="/" exact className="link" activeClassName="activeLink">
+      Home
+    </NavLink>
+
+    {isAuthenticated && (
+      <NavLink to="/tasks" exact className="link" activeClassName="activeLink">
+        Tasks
       </NavLink>
-    </li>
-    <li>
-      <NavLink
-        to={routes.CONTACTS}
-        className="link"
-        activeClassName="active-link"
-      >
-        Contacts
-      </NavLink>
-    </li>
-    <li>
-      <NavLink to={routes.LOGIN} className="link" activeClassName="active-link">
-        LogIn
-      </NavLink>
-    </li>
-    <li>
-      <NavLink
-        to={routes.REGISTER}
-        className="link"
-        activeClassName="active-link"
-      >
-        Register
-      </NavLink>
-    </li>
-  </ul>
+    )}
+  </nav>
 );
 
-export default Navigation;
+export default withAuth(Navigation);

@@ -4,6 +4,7 @@ import { authSelectors } from '../redux/auth';
 import Navigation from './Navigation';
 import Logo from './Logo';
 import UserMenu from './UserMenu';
+import AuthNav from './AuthNav';
 import ButtonThemeChanger from './ButtonThemeChanger';
 
 const AppBar = ({ isAuthenticated }) => (
@@ -13,7 +14,7 @@ const AppBar = ({ isAuthenticated }) => (
       <Navigation />
       <ButtonThemeChanger />
     </div>
-    {isAuthenticated && <UserMenu />}
+    {isAuthenticated ? <UserMenu /> : <AuthNav />}
   </header>
 );
 

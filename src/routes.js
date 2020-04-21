@@ -1,8 +1,36 @@
-const routes = Object.freeze({
-  HOMEPAGE: '/',
-  REGISTER: '/register ', //- публичный маршрут регистрации нового пользователя с формой
-  LOGIN: '/login ', //- публичный маршрут логина сущестующего пользователя с формой
-  CONTACTS: '/contacts ', //- приватный маршрут для работы с коллекцией контактов пользователя
-});
+import { lazy } from 'react';
 
-export default routes;
+export default [
+  {
+    path: '/',
+    label: 'Home',
+    exact: true,
+    component: lazy(() => import('./views/Homepage')),
+    private: false,
+    restricted: false,
+  },
+  {
+    path: '/register',
+    label: 'Register',
+    exact: true,
+    component: lazy(() => import('./views/RegisterPage')),
+    private: false,
+    restricted: true,
+  },
+  {
+    path: '/login',
+    label: 'Login',
+    exact: true,
+    component: lazy(() => import('./views/LoginPage')),
+    private: false,
+    restricted: true,
+  },
+  {
+    path: '/contacts',
+    label: 'Contacts',
+    exact: true,
+    component: lazy(() => import('./views/Contacts/ContactsContainer')),
+    private: true,
+    restricted: false,
+  },
+];
