@@ -10,8 +10,13 @@ const Navigation = ({ isAuthenticated }) => (
     </NavLink>
 
     {isAuthenticated && (
-      <NavLink to="/tasks" exact className="link" activeClassName="activeLink">
-        Tasks
+      <NavLink
+        to="/contacts"
+        exact
+        className="link"
+        activeClassName="activeLink"
+      >
+        Contacts
       </NavLink>
     )}
   </nav>
